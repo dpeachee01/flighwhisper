@@ -1,235 +1,220 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flight Whisper – Your co-pilot when you don't have signal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #3ebfb0;
+      --teal-dark: #2fa89a;
+      --white: #ffffff;
+      --gray-light: #c8cdd6;
+      --gray-mid: #8a9099;
+      --dark: #0d0f12;
+      --nav-bg: rgba(10,12,16,0.92);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 62px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; }
+    .nav-logo span { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white); letter-spacing: 0.01em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .btn-contact { background: var(--teal); color: var(--white) !important; padding: 8px 20px; border-radius: 6px; font-weight: 600; font-size: 0.88rem !important; transition: background 0.2s !important; }
+    .btn-contact:hover { background: var(--teal-dark) !important; }
+    .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://i.imgur.com/BMCu0aZ.jpeg'); background-size: cover; background-position: center top; background-repeat: no-repeat; filter: brightness(0.45); z-index: 0; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,12,16,0.3) 0%, rgba(10,12,16,0.1) 40%, rgba(10,12,16,0.7) 80%, rgba(10,12,16,1) 100%); z-index: 1; }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero-logo { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 52px; }
+    .hero-logo svg { width: 68px; height: 68px; }
+    .hero-logo-text { font-family: 'Manrope', sans-serif; font-size: 2.4rem; font-weight: 700; letter-spacing: 0.01em; }
+    .hero h1 { font-family: 'Manrope', sans-serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.01em; }
+    .hero p { font-size: 1.05rem; color: var(--gray-light); line-height: 1.7; max-width: 520px; margin: 0 auto 36px; }
+    .features-list { list-style: none; display: inline-flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 52px; }
+    .features-list li { display: flex; align-items: center; gap: 12px; font-size: 0.97rem; color: var(--gray-light); }
+    .features-list li::before { content: ''; display: inline-block; width: 18px; height: 18px; min-width: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpolyline points='4,10 8,14 16,6' stroke='%233ebfb0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center/contain; }
+    .email-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto 10px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .email-form input { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-right: none; border-radius: 8px 0 0 8px; color: var(--white); font-size: 0.93rem; font-family: 'Inter', sans-serif; outline: none; transition: background 0.2s; }
+    .email-form input::placeholder { color: var(--gray-mid); }
+    .email-form input:focus { background: rgba(255,255,255,0.13); }
+    .email-form button { padding: 14px 22px; background: var(--teal); color: var(--white); border: none; border-radius: 0 8px 8px 0; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+    .email-form button:hover { background: var(--teal-dark); }
+    .coming-soon { font-size: 0.83rem; color: var(--gray-mid); margin-bottom: 60px; }
+    .phone-section { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 960px; margin: 0 auto; padding: 80px 24px; }
+    .phone-placeholder { flex: 0 0 auto; width: 220px; background: #1a1c22; border-radius: 32px; border: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.7); transform: rotate(-4deg); font-size: 0.78rem; }
+    .phone-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--gray-mid); margin-bottom: 14px; }
+    .phone-airport { font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 14px; }
+    .phone-freqs { display: flex; gap: 16px; margin-bottom: 14px; }
+    .freq-block { flex: 1; }
+    .freq-num { font-family: 'Manrope', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--white); line-height: 1; }
+    .freq-label { font-size: 0.68rem; color: var(--gray-mid); }
+    .phone-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 10px 0; }
+    .phone-row { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--gray-mid); margin-bottom: 6px; }
+    .phone-row span:last-child { color: var(--white); }
+    .phone-nearest { margin-top: 12px; font-size: 0.7rem; color: var(--gray-mid); margin-bottom: 8px; }
+    .airport-card { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; }
+    .airport-card-left { color: var(--white); font-weight: 600; }
+    .airport-card-right { color: var(--gray-mid); }
+    .cta-box { flex: 1; max-width: 420px; }
+    .cta-box h2 { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+    .cta-box p { font-size: 0.95rem; color: var(--gray-light); margin-bottom: 20px; }
+    .cta-box .email-form { margin: 0 0 10px; }
+    .social-icons { display: flex; gap: 12px; margin-top: 14px; align-items: center; }
+    .social-icons a { color: var(--gray-mid); text-decoration: none; transition: color 0.2s; }
+    .social-icons a:hover { color: var(--white); }
+    .social-icons svg { width: 20px; height: 20px; }
+    footer { background: #080a0d; border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 40px 28px; }
+    .footer-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 6px; }
+    .footer-logo svg { width: 36px; height: 36px; }
+    .footer-logo span { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--white); }
+    .footer-tagline { font-size: 0.82rem; color: var(--gray-mid); margin-left: 46px; }
+    .footer-right { display: flex; gap: 24px; align-items: center; }
+    .footer-right a { color: var(--gray-mid); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-right a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+    .footer-links-left { display: flex; gap: 20px; }
+    .footer-links-left a { color: var(--gray-mid); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links-left a:hover { color: var(--white); }
+    .footer-copy { font-size: 0.75rem; color: rgba(138,144,153,0.6); margin-top: 6px; }
+    @media (max-width: 700px) {
+      nav { padding: 0 16px; }
+      .nav-links { gap: 16px; }
+      .phone-section { flex-direction: column; padding: 40px 24px 60px; }
+      .phone-placeholder { transform: none; }
+      .footer-top { flex-direction: column; gap: 20px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Flight Whisper – Your co-pilot when you don't have signal&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--teal: #3ebfb0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--teal-dark: #2fa89a;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--white: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--gray-light: #c8cdd6;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--gray-mid: #8a9099;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--dark: #0d0f12;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--nav-bg: rgba(10,12,16,0.92);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>html { scroll-behavior: smooth; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--white); overflow-x: hidden; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 62px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav-logo svg { width: 36px; height: 36px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav-logo span { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white); letter-spacing: 0.01em; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav-links a:hover { color: var(--white); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn-contact { background: var(--teal); color: var(--white) !important; padding: 8px 20px; border-radius: 6px; font-weight: 600; font-size: 0.88rem !important; transition: background 0.2s !important; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn-contact:hover { background: var(--teal-dark) !important; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; overflow: hidden; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-bg { position: absolute; inset: 0; background-image: url('https://i.imgur.com/BMCu0aZ.jpeg'); background-size: cover; background-position: center top; background-repeat: no-repeat; filter: brightness(0.45); z-index: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,12,16,0.3) 0%, rgba(10,12,16,0.1) 40%, rgba(10,12,16,0.7) 80%, rgba(10,12,16,1) 100%); z-index: 1; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-content { position: relative; z-index: 2; max-width: 720px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-logo { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 52px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-logo svg { width: 68px; height: 68px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-logo-text { font-family: 'Manrope', sans-serif; font-size: 2.4rem; font-weight: 700; letter-spacing: 0.01em; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero h1 { font-family: 'Manrope', sans-serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.01em; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero p { font-size: 1.05rem; color: var(--gray-light); line-height: 1.7; max-width: 520px; margin: 0 auto 36px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.features-list { list-style: none; display: inline-flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 52px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.features-list li { display: flex; align-items: center; gap: 12px; font-size: 0.97rem; color: var(--gray-light); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.features-list li::before { content: ''; display: inline-block; width: 18px; height: 18px; min-width: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpolyline points='4,10 8,14 16,6' stroke='%233ebfb0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") no-repeat center/contain; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.email-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto 10px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.email-form input { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-right: none; border-radius: 8px 0 0 8px; color: var(--white); font-size: 0.93rem; font-family: 'Inter', sans-serif; outline: none; transition: background 0.2s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.email-form input::placeholder { color: var(--gray-mid); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.email-form input:focus { background: rgba(255,255,255,0.13); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.email-form button { padding: 14px 22px; background: var(--teal); color: var(--white); border: none; border-radius: 0 8px 8px 0; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background 0.2s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.email-form button:hover { background: var(--teal-dark); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.coming-soon { font-size: 0.83rem; color: var(--gray-mid); margin-bottom: 60px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-section { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 960px; margin: 0 auto; padding: 80px 24px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-placeholder { flex: 0 0 auto; width: 220px; background: #1a1c22; border-radius: 32px; border: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.7); transform: rotate(-4deg); font-size: 0.78rem; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--gray-mid); margin-bottom: 14px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-airport { font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 14px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-freqs { display: flex; gap: 16px; margin-bottom: 14px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.freq-block { flex: 1; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.freq-num { font-family: 'Manrope', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--white); line-height: 1; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.freq-label { font-size: 0.68rem; color: var(--gray-mid); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 10px 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-row { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--gray-mid); margin-bottom: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-row span:last-child { color: var(--white); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.phone-nearest { margin-top: 12px; font-size: 0.7rem; color: var(--gray-mid); margin-bottom: 8px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.airport-card { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.airport-card-left { color: var(--white); font-weight: 600; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.airport-card-right { color: var(--gray-mid); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.cta-box { flex: 1; max-width: 420px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.cta-box h2 { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.cta-box p { font-size: 0.95rem; color: var(--gray-light); margin-bottom: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.cta-box .email-form { margin: 0 0 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.social-icons { display: flex; gap: 12px; margin-top: 14px; align-items: center; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.social-icons a { color: var(--gray-mid); text-decoration: none; transition: color 0.2s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.social-icons a:hover { color: var(--white); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.social-icons svg { width: 20px; height: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>footer { background: #080a0d; border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 40px 28px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-logo svg { width: 36px; height: 36px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-logo span { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--white); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-tagline { font-size: 0.82rem; color: var(--gray-mid); margin-left: 46px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-right { display: flex; gap: 24px; align-items: center; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-right a { color: var(--gray-mid); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-right a:hover { color: var(--white); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-links-left { display: flex; gap: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-links-left a { color: var(--gray-mid); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-links-left a:hover { color: var(--white); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-copy { font-size: 0.75rem; color: rgba(138,144,153,0.6); margin-top: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 700px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>nav { padding: 0 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.nav-links { gap: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.phone-section { flex-direction: column; padding: 40px 24px 60px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.phone-placeholder { transform: none; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.footer-top { flex-direction: column; gap: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;a href="#" class="nav-logo"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;circle cx="20" cy="20" r="19" stroke="white" stroke-width="1.5"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;path d="M11 22v-4a9 9 0 0 1 18 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;rect x="8" y="20" width="5" height="9" rx="2.5" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;rect x="27" y="20" width="5" height="9" rx="2.5" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;rect x="17" y="17" width="2" height="6" rx="1" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;rect x="21" y="15" width="2" height="10" rx="1" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Flight Whisper&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul class="nav-links"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#"&gt;Terms of Use&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;&lt;a href="#contact" class="btn-contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section class="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero-bg"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero-overlay"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="hero-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hero-logo"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;circle cx="20" cy="20" r="19" stroke="white" stroke-width="1.5"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;path d="M11 22v-4a9 9 0 0 1 18 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect x="8" y="20" width="5" height="9" rx="2.5" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect x="27" y="20" width="5" height="9" rx="2.5" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect x="17" y="17" width="2" height="6" rx="1" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;rect x="21" y="15" width="2" height="10" rx="1" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="hero-logo-text"&gt;Flight Whisper&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;Your co-pilot when&lt;br&gt;you don't have signal&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Get airport frequencies, runway data, and nearest airport info—instantly, even offline.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;ul class="features-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Instant CTAF, AWOS, and tower frequencies&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Runway lengths and airport details&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Nearest airport with heading and distance&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Built for real-world flying—not dependent on internet or cell service&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="email-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="email" placeholder="Enter your email" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="button"&gt;Get Early Access&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="coming-soon"&gt;Coming soon on iPhone&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section class="phone-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="phone-placeholder"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-top"&gt;&lt;span&gt;3:44&lt;/span&gt;&lt;span&gt;▲ ✦&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-airport"&gt;Knoxville (KTYS)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-freqs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="freq-block"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="freq-num"&gt;118.0&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="freq-label"&gt;Tower&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="freq-block"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="freq-num"&gt;121.9&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="freq-label"&gt;ATIS&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-divider"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-row"&gt;&lt;span&gt;Runway&lt;/span&gt;&lt;span&gt;36L&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-row"&gt;&lt;span&gt;True Feet&lt;/span&gt;&lt;span&gt;9,000 ft&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-row"&gt;&lt;span&gt;Elev. City&lt;/span&gt;&lt;span&gt;981 ft&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-row"&gt;&lt;span&gt;Fuel&lt;/span&gt;&lt;span&gt;83 M / 32 L&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-divider"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="phone-nearest"&gt;Nearest Airport ▾&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="airport-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="airport-card-left"&gt;DTW — Detroit Metrop.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="airport-card-right"&gt;~ 30.0 km&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="cta-box" id="contact"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Stay in the loop&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Enter your email to get early access:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="email-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="email" placeholder="Enter your email" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="button"&gt;Get Early Access&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="coming-soon"&gt;Coming soon on iPhone&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="social-icons"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" aria-label="Twitter"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;svg viewBox="0 0 24 24" fill="currentColor"&gt;&lt;path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="mailto:hello@flightwhisper.com" aria-label="Email"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;rect x="2" y="4" width="20" height="16" rx="2"/&gt;&lt;path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="footer-top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" class="footer-logo"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;circle cx="20" cy="20" r="19" stroke="white" stroke-width="1.5"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;path d="M11 22v-4a9 9 0 0 1 18 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;rect x="8" y="20" width="5" height="9" rx="2.5" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;rect x="27" y="20" width="5" height="9" rx="2.5" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;rect x="17" y="17" width="2" height="6" rx="1" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;rect x="21" y="15" width="2" height="10" rx="1" fill="white"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;Flight Whisper&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="footer-tagline"&gt;Built by pilots&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-right"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#"&gt;Privacy Policy&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#"&gt;Terms of Use&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="footer-bottom"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-links-left"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#"&gt;Privacy Policy&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#"&gt;Terms of Use&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="footer-copy"&gt;© 2022 Flight Whisper. All rights reserved.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="white" stroke-width="1.5"/>
+        <path d="M11 22v-4a9 9 0 0 1 18 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <rect x="8" y="20" width="5" height="9" rx="2.5" fill="white"/>
+        <rect x="27" y="20" width="5" height="9" rx="2.5" fill="white"/>
+        <rect x="17" y="17" width="2" height="6" rx="1" fill="white"/>
+        <rect x="21" y="15" width="2" height="10" rx="1" fill="white"/>
+      </svg>
+      <span>Flight Whisper</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Use</a></li>
+      <li><a href="#contact" class="btn-contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="white" stroke-width="1.5"/>
+          <path d="M11 22v-4a9 9 0 0 1 18 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="8" y="20" width="5" height="9" rx="2.5" fill="white"/>
+          <rect x="27" y="20" width="5" height="9" rx="2.5" fill="white"/>
+          <rect x="17" y="17" width="2" height="6" rx="1" fill="white"/>
+          <rect x="21" y="15" width="2" height="10" rx="1" fill="white"/>
+        </svg>
+        <span class="hero-logo-text">Flight Whisper</span>
+      </div>
+      <h1>Your co-pilot when<br>you don't have signal</h1>
+      <p>Get airport frequencies, runway data, and nearest airport info—instantly, even offline.</p>
+      <ul class="features-list">
+        <li>Instant CTAF, AWOS, and tower frequencies</li>
+        <li>Runway lengths and airport details</li>
+        <li>Nearest airport with heading and distance</li>
+        <li>Built for real-world flying—not dependent on internet or cell service</li>
+      </ul>
+      <div class="email-form">
+        <input type="email" placeholder="Enter your email" />
+        <button type="button">Get Early Access</button>
+      </div>
+      <p class="coming-soon">Coming soon on iPhone</p>
+    </div>
+  </section>
+  <section class="phone-section">
+    <div class="phone-placeholder">
+      <div class="phone-top"><span>3:44</span><span>▲ ✦</span></div>
+      <div class="phone-airport">Knoxville (KTYS)</div>
+      <div class="phone-freqs">
+        <div class="freq-block">
+          <div class="freq-num">118.0</div>
+          <div class="freq-label">Tower</div>
+        </div>
+        <div class="freq-block">
+          <div class="freq-num">121.9</div>
+          <div class="freq-label">ATIS</div>
+        </div>
+      </div>
+      <div class="phone-divider"></div>
+      <div class="phone-row"><span>Runway</span><span>36L</span></div>
+      <div class="phone-row"><span>True Feet</span><span>9,000 ft</span></div>
+      <div class="phone-row"><span>Elev. City</span><span>981 ft</span></div>
+      <div class="phone-row"><span>Fuel</span><span>83 M / 32 L</span></div>
+      <div class="phone-divider"></div>
+      <div class="phone-nearest">Nearest Airport ▾</div>
+      <div class="airport-card">
+        <div class="airport-card-left">DTW — Detroit Metrop.</div>
+        <div class="airport-card-right">~ 30.0 km</div>
+      </div>
+    </div>
+    <div class="cta-box" id="contact">
+      <h2>Stay in the loop</h2>
+      <p>Enter your email to get early access:</p>
+      <div class="email-form">
+        <input type="email" placeholder="Enter your email" />
+        <button type="button">Get Early Access</button>
+      </div>
+      <p class="coming-soon">Coming soon on iPhone</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="mailto:hello@flightwhisper.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a href="#" class="footer-logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" stroke="white" stroke-width="1.5"/>
+            <path d="M11 22v-4a9 9 0 0 1 18 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="8" y="20" width="5" height="9" rx="2.5" fill="white"/>
+            <rect x="27" y="20" width="5" height="9" rx="2.5" fill="white"/>
+            <rect x="17" y="17" width="2" height="6" rx="1" fill="white"/>
+            <rect x="21" y="15" width="2" height="10" rx="1" fill="white"/>
+          </svg>
+          <span>Flight Whisper</span>
+        </a>
+        <div class="footer-tagline">Built by pilots</div>
+      </div>
+      <div class="footer-right">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-links-left">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+      <div class="footer-copy">© 2022 Flight Whisper. All rights reserved.</div>
+    </div>
+  </footer>
 </body>
 </html>
