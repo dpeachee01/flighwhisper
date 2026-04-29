@@ -37,6 +37,24 @@
     .email-form input:focus { background: rgba(255,255,255,0.13); }
     .email-form button { padding: 14px 22px; background: var(--teal); color: var(--white); border: none; border-radius: 0 8px 8px 0; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
     .email-form button:hover { background: var(--teal-dark); }
+    .app-store-button {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--white);
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.app-store-button:hover {
+  background: var(--teal-dark);
+  transform: translateY(-1px);
+}
     .coming-soon { font-size: 0.83rem; color: var(--gray-mid); margin-bottom: 60px; }
     .phone-section { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 960px; margin: 0 auto; padding: 80px 24px; }
     .phone-placeholder { flex: 0 0 auto; width: 220px; background: #1a1c22; border-radius: 32px; border: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.7); transform: rotate(-4deg); font-size: 0.78rem; }
@@ -121,7 +139,7 @@
         <span class="hero-logo-text">Flight Whisper</span>
       </div>
       <h1>Your co-pilot when<br>you don't have signal</h1>
-      <p>Get airport frequencies, runway data, and nearest airport info—instantly, even offline.</p>
+      <p>Now available on the App Store. Get airport frequencies, runway data, and nearest airport info—instantly, even offline.</p>
       <ul class="features-list">
         <li>Instant CTAF, AWOS, and tower frequencies</li>
         <li>Runway lengths and airport details</li>
@@ -150,14 +168,20 @@
         <div class="airport-card-right">~ 30.0 km</div>
       </div>
     </div>
-    <div class="cta-box" id="contact">
-      <h2>Stay in the loop</h2>
-      <p>Enter your email to get early access:</p>
-      <div class="email-form">
-        <input type="email" placeholder="Enter your email" />
-        <button type="button" onclick="window.open('http://eepurl.com/jCINdA','_blank')">Get Early Access</button>
-      </div>
-      <p class="coming-soon">Coming soon on iPhone</p>
+   <div class="cta-box" id="contact">
+  <h2>Now available on the App Store</h2>
+  <p>Download Flight Whisper for quick airport info, frequencies, runway details, direct-to guidance, and emergency checklist access.</p>
+
+  <a 
+    href="https://apps.apple.com/us/app/flight-whisper/id6763575587" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="app-store-button"
+  >
+    Download on the App Store
+  </a>
+
+  <p class="coming-soon">Available now for iPhone and iPad</p>
       <div class="social-icons">
         <a href="#" aria-label="Twitter">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
