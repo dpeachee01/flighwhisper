@@ -56,11 +56,20 @@
   transform: translateY(-1px);
 }
     .coming-soon { font-size: 0.83rem; color: var(--gray-mid); margin-bottom: 60px; }
-    .phone-section { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 960px; margin: 0 auto; padding: 80px 24px; }
-    .phone-placeholder { flex: 0 0 auto; width: 220px; background: #1a1c22; border-radius: 32px; border: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.7); transform: rotate(-4deg); font-size: 0.78rem; }
+.phone-section {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}    .phone-placeholder { flex: 0 0 auto; width: 220px; background: #1a1c22; border-radius: 32px; border: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.7); transform: rotate(-4deg); font-size: 0.78rem; }
     .phone-screenshot {
   flex: 0 0 auto;
-  width: 240px;
+  width: 200px;
   transform: rotate(-4deg);
   filter: drop-shadow(0 30px 60px rgba(0,0,0,0.7));
 }
@@ -84,7 +93,11 @@
     .airport-card { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; }
     .airport-card-left { color: var(--white); font-weight: 600; }
     .airport-card-right { color: var(--gray-mid); }
-    .cta-box { flex: 1; max-width: 420px; }
+    .cta-box {
+  flex: 1;
+  max-width: 520px;
+  min-width: 360px;
+}
     .cta-box h2 { font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
     .cta-box p { font-size: 0.95rem; color: var(--gray-light); margin-bottom: 20px; }
     .cta-box .email-form { margin: 0 0 10px; }
