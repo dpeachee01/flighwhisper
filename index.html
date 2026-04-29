@@ -58,6 +58,19 @@
     .coming-soon { font-size: 0.83rem; color: var(--gray-mid); margin-bottom: 60px; }
     .phone-section { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 960px; margin: 0 auto; padding: 80px 24px; }
     .phone-placeholder { flex: 0 0 auto; width: 220px; background: #1a1c22; border-radius: 32px; border: 1px solid rgba(255,255,255,0.1); padding: 20px 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.7); transform: rotate(-4deg); font-size: 0.78rem; }
+    .phone-screenshot {
+  flex: 0 0 auto;
+  width: 240px;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.7));
+}
+
+.phone-screenshot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 32px;
+}
     .phone-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: var(--gray-mid); margin-bottom: 14px; }
     .phone-airport { font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 14px; }
     .phone-freqs { display: flex; gap: 16px; margin-bottom: 14px; }
@@ -94,6 +107,10 @@
     .footer-links-left a:hover { color: var(--white); }
     .footer-copy { font-size: 0.75rem; color: rgba(138,144,153,0.6); margin-top: 6px; }
     @media (max-width: 700px) {
+      .phone-screenshot {
+  transform: none;
+  width: 220px;
+}
       nav { padding: 0 16px; }
       .nav-links { gap: 16px; }
       .phone-section { flex-direction: column; padding: 40px 24px 60px; }
@@ -149,25 +166,11 @@
     </div>
   </section>
   <section class="phone-section">
-    <div class="phone-placeholder">
-      <div class="phone-top"><span>3:44</span><span>▲ ✦</span></div>
-      <div class="phone-airport">Knoxville (KTYS)</div>
-      <div class="phone-freqs">
-        <div class="freq-block"><div class="freq-num">118.0</div><div class="freq-label">Tower</div></div>
-        <div class="freq-block"><div class="freq-num">121.9</div><div class="freq-label">ATIS</div></div>
-      </div>
-      <div class="phone-divider"></div>
-      <div class="phone-row"><span>Runway</span><span>36L</span></div>
-      <div class="phone-row"><span>True Feet</span><span>9,000 ft</span></div>
-      <div class="phone-row"><span>Elev. City</span><span>981 ft</span></div>
-      <div class="phone-row"><span>Fuel</span><span>83 M / 32 L</span></div>
-      <div class="phone-divider"></div>
-      <div class="phone-nearest">Nearest Airport ▾</div>
-      <div class="airport-card">
-        <div class="airport-card-left">DTW — Detroit Metrop.</div>
-        <div class="airport-card-right">~ 30.0 km</div>
-      </div>
-    </div>
+    <section class="phone-section">
+  <div class="phone-screenshot">
+    <img src="4.png" alt="Flight Whisper app screenshot">
+  </div>
+  <div class="cta-box" id="contact">
    <div class="cta-box" id="contact">
   <h2>Now available on the App Store</h2>
   <p>Download Flight Whisper for quick airport info, frequencies, runway details, direct-to guidance, and emergency checklist access.</p>
